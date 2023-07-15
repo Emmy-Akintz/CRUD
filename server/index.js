@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -7,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb+srv://EmmyAkints:DrHorlmes2005@mernapp.ll3japg.mongodb.net/?retryWrites=true&w=majority");
+mongoose.connect(process.env.MONGO_URI);
 
 app.get('/', (req, res) => {
     UserModel.find({})
@@ -47,6 +48,6 @@ app.post("/createUser", (req, res) => {
 });
 
 
-app.listen(3001, () => {
+app.listen(process.env.PORT, () => {
     console.log('Server is Running');
 });
